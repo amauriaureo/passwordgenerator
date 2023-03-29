@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+</head>
+<body>
+    <h1>password generator</h1>
+    <p>use our password generator to create a strong and secure one.</p>
+
+    <input type="text" name="password" id="password">
+
+    <input 
+        type="range"
+        name="password-length"
+        id="password-length"
+        value="16"
+        min ="4"
+        max="64"
+    >
+
+    <button id="copy">copy password</button>
+    
+    <script>
+        const inputE1 = document.querySelector("#password")
+        let passwordLength = 16
+
+        // function to generate password
+        function generatePassword() {
+            const chars = 
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789!@#$%¨'&*(){}[]^Ç?~;.><,"
+
+            let password = ""
+        
+            for(let i = 0; i < passwordLength; i++) {
+                const randomNumber = Math.floor(Math.random() * chars.length)
+                password += chars.substring(randomNumber, randomNumber + 1)
+            }
+        // Input password from line 13
+            // const inputE1 = document.querySelector("#password") #this function went to line 27
+            inputE1.value = password
+        }
+        // Copping password
+        function copy() {
+            navigator.clipboard.writeText(inputE1.value)
+        }
+        // Adding range
+        const passwordLengthE1 = document.querySelector('#password-length')
+        passwordLengthE1.addEventListener("input", function() {
+            passwordLength = passwordLengthE1.value
+            generatePassword()
+        })
+        // Insert the event in the copy password button
+        const copyButtonE1 = document.querySelector("#copy")
+        copyButtonE1.addEventListener("click", copy)
+
+        generatePassword()
+</script>
+
+</body>
+
+</html>
